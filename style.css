@@ -1,0 +1,544 @@
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+background:black;
+color:white;
+font-family:monospace;
+text-align:center;
+overflow-x:hidden;
+}
+
+
+/* CÉU ESTRELADO */
+
+.stars{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background-image:
+radial-gradient(2px 2px at 20px 30px, white, transparent),
+radial-gradient(2px 2px at 100px 80px, white, transparent),
+radial-gradient(2px 2px at 200px 150px, white, transparent),
+radial-gradient(2px 2px at 300px 200px, white, transparent),
+radial-gradient(2px 2px at 400px 50px, white, transparent),
+radial-gradient(2px 2px at 500px 120px, white, transparent);
+
+background-repeat:repeat;
+
+animation:starsMove 120s linear infinite;
+
+z-index:-10;
+
+}
+
+@keyframes starsMove{
+
+from{transform:translateY(0);}
+to{transform:translateY(-2000px);}
+
+}
+
+
+
+/* ESTRELA CADENTE */
+
+.shooting-star{
+
+position:fixed;
+
+top:20%;
+left:-100px;
+
+width:4px;
+height:4px;
+
+background:white;
+
+box-shadow:0 0 10px white;
+
+transform:rotate(45deg);
+
+animation:shoot 6s linear infinite;
+
+}
+
+@keyframes shoot{
+
+0%{
+transform:translateX(0) translateY(0) rotate(45deg);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+100%{
+transform:translateX(1200px) translateY(300px) rotate(45deg);
+opacity:0;
+}
+
+}
+
+
+
+/* TELAS */
+
+.tela{
+
+display:none;
+padding:40px;
+min-height:100vh;
+
+}
+
+.tela.ativa{
+
+display:block;
+
+}
+
+
+
+/* BOTÕES */
+
+button{
+
+margin-top:30px;
+padding:12px 20px;
+
+background:transparent;
+border:1px solid white;
+
+color:white;
+
+cursor:pointer;
+
+font-size:16px;
+
+transition:0.3s;
+
+}
+
+button:hover{
+
+background:white;
+color:black;
+
+}
+
+
+
+/* TIMELINE */
+
+.timeline{
+
+max-width:800px;
+
+margin:auto;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+
+gap:30px;
+
+justify-items:center;
+
+}
+
+img{
+max-width:100%;
+height:auto;
+}
+
+/* POLAROID */
+
+.polaroid{
+
+background:white;
+padding:10px;
+padding-bottom:25px;
+
+width:100%;
+max-width:220px;
+
+margin:30px auto;
+
+box-shadow:0 8px 20px rgba(0,0,0,0.6);
+
+}
+
+.polaroid img{
+
+width:100%;
+
+}
+
+.polaroid p{
+
+color:black;
+font-size:14px;
+
+}
+
+.polaroid:nth-child(odd){
+transform:rotate(-3deg);
+}
+
+.polaroid:nth-child(even){
+transform:rotate(3deg);
+}
+
+
+/* AKAI ITO */
+
+.akai-container{
+
+position:relative;
+width:100%;
+max-width:600px;
+height:200px;
+margin:40px auto;
+
+}
+
+.boneco{
+
+position:absolute;
+font-size:40px;
+
+}
+
+.left{
+left:0;
+top:110px;
+}
+
+.right{
+right:0;
+top:110px;
+}
+
+.fio{
+
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+}
+
+#linhaAkai{
+fill:none;
+stroke:#ff2d55;
+stroke-width:4;
+
+stroke-dasharray:800;
+stroke-dashoffset:800;
+
+animation:
+desenharFio 3s ease forwards,
+pulsarFio 2s ease-in-out infinite 3s;
+
+filter:drop-shadow(0 0 6px #ff2d55);
+}
+
+@keyframes pulsarFio{
+
+0%{
+stroke-width:4;
+}
+
+50%{
+stroke-width:6;
+}
+
+100%{
+stroke-width:4;
+}
+
+}
+
+@keyframes desenharFio{
+
+to{
+stroke-dashoffset:0;
+}
+
+}
+
+
+
+/* JOGO */
+
+.hearts{
+
+font-size:40px;
+
+}
+
+.hearts span{
+
+margin:15px;
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.hearts span:hover{
+
+transform:scale(1.3);
+
+}
+
+#botaoFinal{
+
+display:none;
+
+}
+
+
+
+/* CARTA FINAL 
+.carta{
+
+max-width:500px;
+margin:auto;
+
+font-size:18px;
+
+line-height:1.6;
+
+white-space:pre-line;
+
+}
+*/
+
+
+.carta{
+
+max-width:500px;
+margin:auto;
+
+font-size:18px;
+
+line-height:1.7;
+
+white-space:pre-line;
+
+opacity:0;
+
+transform:scale(0.8);
+
+animation:abrirCarta 1.5s ease forwards;
+
+}
+
+@keyframes abrirCarta{
+
+from{
+opacity:0;
+transform:scale(0.8);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+
+/* ANIMAÇÃO DE ENTRADA DAS POLAROIDS */
+
+.evento{
+width:100%;
+display:flex;
+justify-content:center;
+}
+
+.evento.apareceu{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+
+.coracao-final{
+
+position:fixed;
+
+bottom:-30px;
+
+left:0;
+
+z-index:999;
+
+font-size:22px;
+
+pointer-events:none;
+
+animation:subir 6s linear forwards;
+
+}
+
+@keyframes subir{
+
+0%{
+transform:translateY(0);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+
+}
+
+@keyframes subir{
+
+0%{
+transform:translateY(0);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+
+}
+
+
+
+
+/* ESTRELAS PISCANDO */
+
+.star{
+
+position:fixed;
+
+width:2px;
+height:2px;
+
+background:white;
+
+border-radius:50%;
+
+opacity:0.3;
+
+animation:piscar 2s infinite alternate;
+
+pointer-events:none;
+
+z-index:-5;
+
+}
+
+@keyframes piscar{
+
+from{
+opacity:0.2;
+transform:scale(1);
+}
+
+to{
+opacity:1;
+transform:scale(1.5);
+}
+
+}
+
+
+
+/* VIATURA PASSANDO */
+
+.viatura{
+
+position:fixed;
+
+left:-300px;
+
+top:50%;
+
+margin-top:-20px;
+
+font-size:40px;
+
+z-index:1000;
+
+pointer-events:none;
+
+white-space:nowrap; /* impede quebrar linha */
+
+animation:viaturaPassar 6s linear forwards;
+
+}
+
+@keyframes viaturaPassar{
+
+0%{
+left:-300px;
+}
+
+100%{
+left:130vw;
+}
+
+}
+
+@keyframes viaturaPassar{
+
+0%{
+left:-300px;
+}
+
+100%{
+left:120vw;
+}
+
+}   
+
+@keyframes viaturaPassar{
+
+0%{
+left:-300px;
+}
+
+100%{
+left:130vw;
+}
+
+}
+
+@keyframes viaturaPassar{
+
+0%{
+left:-200px;
+}
+
+100%{
+left:120vw;
+}
+
+}
