@@ -542,3 +542,71 @@ left:120vw;
 }
 
 }
+
+
+.video-container{
+
+max-width:400px;
+margin:40px auto;
+
+}
+
+
+#cinemaOverlay{
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.9);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:2000;
+
+animation:fadeCinema 1s ease;
+
+}
+
+.cinemaBox{
+
+text-align:center;
+max-width:400px;
+color:white;
+
+}
+
+.cinemaBox video{
+
+width:100%;
+border-radius:12px;
+
+box-shadow:0 0 40px rgba(255,255,255,0.2);
+
+}
+
+@keyframes fadeCinema{
+
+from{
+opacity:0;
+}
+
+to{
+opacity:1;
+}
+
+}
+
+
+#finalMensagem{
+opacity:0;
+margin-top:30px;
+font-size:24px;
+text-align:center;
+transition:opacity 2s ease;
+}
