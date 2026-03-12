@@ -1,3 +1,8 @@
+
+let telaAtual = 1;
+document.querySelectorAll(".viatura").forEach(v => v.remove());
+
+
 const texto = `
 > iniciando sistema...
 
@@ -42,9 +47,9 @@ irParaTela(2);
 
 
 function irParaTela(numero){
-
-document.querySelectorAll(".tela").forEach(tela => {
-tela.classList.remove("ativa");
+    telaAtual = numero;
+    document.querySelectorAll(".tela").forEach(tela => {
+    tela.classList.remove("ativa");
 });
 
 document.getElementById("tela"+numero).classList.add("ativa");
@@ -63,9 +68,22 @@ setInterval(criarCoracao,600);
 
 setInterval(criarViatura,12000);
 
-}    
+}
 
-}   
+/* NOVA TELA DO VIDEO */
+
+if(numero === 6){
+
+const musica = document.getElementById("music");
+
+if(musica){
+musica.pause();
+}
+
+}
+
+}
+
 
 
 
@@ -221,11 +239,11 @@ setInterval(criarEstrelaCadente,8000);
 
 function criarViatura(){
 
+if(telaAtual !== 5) return; // só funciona na tela 5
+
 const viatura = document.createElement("div");
 
 viatura.className = "viatura";
-
-/* emoji de viatura + policiais correndo */
 
 viatura.innerText = "🚓💨👮‍♂️👮‍♂️👮‍♂️👮‍♀️";
 
@@ -235,4 +253,52 @@ setTimeout(()=>{
 viatura.remove();
 },6000);
 
-}   
+}
+
+
+const video = document.getElementById("meuVideo");
+const musica = document.getElementById("music");
+
+if(video){
+
+video.addEventListener("ended",()=>{
+
+/* fade in da música */
+
+musica.volume = 0;
+musica.play();
+
+let volume = 0;
+
+const fade = setInterval(()=>{
+
+if(volume < 1){
+
+volume += 0.05;
+musica.volume = volume;
+
+}else{
+
+clearInterval(fade);
+
+}
+
+},200);
+
+
+/* mostrar mensagem final */
+
+const msg = document.getElementById("finalMensagem");
+
+setTimeout(()=>{
+msg.style.opacity = 1;
+},500);
+
+
+/* RESETAR O VIDEO */
+
+video.currentTime = 0;
+
+});
+
+}
